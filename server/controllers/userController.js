@@ -15,7 +15,6 @@ module.exports = {
             console.log(req.body);
             let userEmail = req.body.email
             if (!validation.signupvalidate(userEmail)) {
-                console.log('invaliddddd');
                 res.status(200).json({ status: "invalid", error: "invalid email format" })
             } else {
                 const users = await User.findOne({ email: userEmail })
@@ -36,7 +35,7 @@ module.exports = {
 
         } catch (err) {
             console.log("err", err)
-            res.status(200).json({ status: 'error', error: "Duplicae email" })
+            res.status(200).json({ status: 'error', error: "Duplicate email" })
         }
     },
 
@@ -64,11 +63,11 @@ module.exports = {
                         }
                     )
 
-                    console.log("slodddoged in sucess")
-                    res.status(200).json({ status: 'ok', message: "Login Sucess", user: token })
+                    console.log("login success")
+                    res.status(200).json({ status: 'ok', message: "Login Success", user: token })
                 } else {
                     console.log("user details invalid");
-                    res.status(200).json({ status: 'error', error: 'userdetails invalid', user: false })
+                    res.status(200).json({ status: 'error', error: 'userDetails invalid', user: false })
 
                 }
             } else {
@@ -111,7 +110,7 @@ module.exports = {
         try {
             let Token = req.params.id;
             let token2 = JSON.parse(Token)
-            console.log(token2, "this is the Tokknen parseec")
+            console.log(token2, "this is the Token parse")
             const decodedToken = jwt.verify(token2, 'secret123');
             console.log(decodedToken)
             const user = await User.findOne({ _id: decodedToken.id });
@@ -125,15 +124,14 @@ module.exports = {
                     }
                 })
                 const image = `http://localhost:4000/${req.files.image[0].filename}`
-                console.log(image, "hereeeeeeeeeeeeeeee");
                 return res.status(200).json({ message: "user found", image });
             }
             else {
-                return res.status(200).json({ status: "error", message: "photo coubldint updaete" })
+                return res.status(200).json({ status: "error", message: "photo couldn't update" })
             }
 
         } catch (err) {
-            console.log(err, "this oneis catch photot")
+            console.log(err, "this one is catch photo")
             res.status(200).json({ status: "error", message: "photo catch error" })
         }
     }

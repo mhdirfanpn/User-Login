@@ -72,7 +72,7 @@ module.exports = {
             }
         } catch (err) {
             console.log("user not found with the edit id ");
-            res.status(400).json({ status: "error", message: "oops errror" })
+            res.status(400).json({ status: "error", message: "oops error" })
         }
 
     },
@@ -96,11 +96,11 @@ module.exports = {
                 res.status(200).json({ status: "ok", message: "user updated", userexists: false })
             } else {
 
-                console.log("user already regsiterd")
-                res.status(200).json({ status: "error", message: "user already registerd", userexists: true })
+                console.log("user already registered")
+                res.status(200).json({ status: "error", message: "user already registered", userexists: true })
             }
         } catch (err) {
-            console.log("update catch errror")
+            console.log("update catch error")
             res.status(200).json({ status: "error", error: "update error" })
         }
     },
